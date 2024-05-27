@@ -27,6 +27,14 @@ function click_filter_element(event) {
 // G
 // CODE according to specification
 function create_filter_element(data) {
+  const parent = data.parent;
+  const list_element = document.createElement("li");
+  list_element.classList.add(data.class);
+  list_element.textContent = data.textContent;
+  parent.appendChild(list_element);
+  list_element.addEventListener("click", click_filter_element);
+  return list_element;
+
 
   /*
     ARGUMENTS
