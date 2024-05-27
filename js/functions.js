@@ -27,11 +27,10 @@ function click_filter_element(event) {
 // G
 // CODE according to specification
 function create_filter_element(data) {
-  const parent = data.parent;
   const list_element = document.createElement("li");
-  list_element.classList.add(data.class);
+  list_element.className = data.class;
+  data.parent.appendChild(list_element);
   list_element.textContent = data.textContent;
-  parent.appendChild(list_element);
   list_element.addEventListener("click", click_filter_element);
   return list_element;
 
@@ -106,6 +105,18 @@ function toggle_cities(event) {
 // ATTENTION: You need to write the specification of all three functions:
 //            create_countries_cities_filters, create_country and create_city
 function create_countries_cities_filters() {
+
+  /*
+ ARGUMENT
+   This function takes an object as an argument. 
+
+
+ SIDE-EFFECTS
+   This function creates a HTML-elements (div) that contains all the information about one country from the COUNTRIES array.
+   
+  NO RETURN VALUE
+
+  */
   function create_country(country) {
     const dom = document.createElement("div");
     dom.classList.add("country");
@@ -149,7 +160,7 @@ function create_filters(object) {
 
   /*
   ARGUMENTS
-  
+
   */
   function array_function(array_element) {
     let filter_elements = create_filter_element({
@@ -200,6 +211,7 @@ function create_language_filter() {
 }
 
 
+// G 
 // CODE according to specifications
 function create_programme(programme) {
 
@@ -212,6 +224,7 @@ function create_programme(programme) {
       This function creates the HTML-element that contains all the information
       about one programme, as seen in the video / image.
       
+     
       G:  No background image required.
       G:  The "see more" element is not required. And that information needs not be in place.
 
@@ -249,6 +262,17 @@ function update_programmes() {
 // in the code review (kodredovisning)
 
 function read_filters() {
+
+  /*
+  ARGUMENTS
+
+
+  SIDE-EFFECTS
+
+
+  RETURN VALUE
+
+  */
 
   const city_selected_dom = document.querySelectorAll("#country_filter li.selected");
 
