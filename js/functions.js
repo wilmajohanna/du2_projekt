@@ -272,14 +272,13 @@ function update_programmes() {
 function read_filters() {
 
   /*
-  ARGUMENTS
-
+  NO ARGUMENTS
 
   SIDE-EFFECTS
-
+    This function creates arrays based on the selected filter elements.
 
   RETURN VALUE
-
+    Returns an array of the programme-elements matched with the "selected" filters. 
   */
 
   const city_selected_dom = document.querySelectorAll("#country_filter li.selected");
@@ -313,7 +312,6 @@ function read_filters() {
     }
   }
   array_each(universities, callback_add_programmes);
-
 
 
   const level_selected_dom = document.querySelectorAll("#level_filter li.selected");
