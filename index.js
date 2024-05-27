@@ -1,33 +1,16 @@
 "use strict";
 
-
-
 /*
   Notice the images on the page header.
   G: The images can be hard-coded in the CSS (as background-image)
   */
 
 // Create Filter Elements
-function create_levels_filter() {
-
-
-}
-create_levels_filter();
-
-function create_subjects_filter() {
-
-}
-create_subjects_filter();
-
-function create_language_filter() {
-
-}
-create_language_filter();
-
-function create_countries_cities_filters() {
-
-}
 create_countries_cities_filters();
+
+create_filters({ name: "level", array_element: LEVELS });
+create_filters({ name: "subject", array_element: SUBJECTS });
+create_filters({ name: "language", array_element: LANGUAGES });
 
 // Add Interaction of search field button
 document.querySelector("#search_field button").addEventListener("click", update_programmes);

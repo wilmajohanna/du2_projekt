@@ -27,6 +27,7 @@ function click_filter_element(event) {
 // G
 // CODE according to specification
 function create_filter_element(data) {
+
   const list_element = document.createElement("li");
   list_element.className = data.class;
   data.parent.appendChild(list_element);
@@ -107,17 +108,26 @@ function toggle_cities(event) {
 function create_countries_cities_filters() {
 
   /*
- ARGUMENT
-   This function takes an object as an argument. 
+    NO ARGUMENTS
 
+    SIDE-EFFECTS
+    This function creates country filter containers
 
- SIDE-EFFECTS
-   This function creates a HTML-elements (div) that contains all the information about one country from the COUNTRIES array.
-   
-  NO RETURN VALUE
+    NO RETURN VALUE
 
   */
   function create_country(country) {
+
+    /*
+      ARGUMENT
+      The function takes an object as argument.
+        
+      SIDE-EFFECTS
+      The function creates a container (div) using an object from the COUNTRIES array.
+        
+      NO RETURN VALUE
+        */
+
     const dom = document.createElement("div");
     dom.classList.add("country");
     dom.classList.add("filter_container");
@@ -136,7 +146,18 @@ function create_countries_cities_filters() {
 
     array_each(cities, create_city);
   }
+
   function create_city(city) {
+
+    /*
+    ARGUMENTS
+    This function takes an object as argument.
+
+    SIDE-EFFECTS
+    The function generates filter elements by employing the create_filter_element function, utilizing the values of the keys of the argument (object) as arguments for create_filter_element. The created filter is then appended to the matching countries. 
+
+    NO RETURN VALUE
+    */
 
     const dom = create_filter_element({
       parent: document.querySelector(`#country_${city.countryID} > ul`),
@@ -159,9 +180,15 @@ function create_countries_cities_filters() {
 function create_filters(object) {
 
   /*
-  ARGUMENTS
+  NO ARGUMENTS
 
+  SIDE-EFFECTS
+  This function creates list-item elements with an id-number as attribute and 
+      text content from the LANGUAGES, LEVELS, and SUBJECTS arrays. It then appends the list-items as children to the unordered-lists within the different containers i.e level_filter, subject_filter, and language_filter.
+
+  NO RETURN VALUE
   */
+
   function array_function(array_element) {
     let filter_elements = create_filter_element({
       parent: document.querySelector(`#${object.name}_filter ul`),
@@ -172,42 +199,6 @@ function create_filters(object) {
     filter_elements.dataset.id = array_element.id
   }
   array_each(object.array_element, array_function)
-}
-
-function create_levels_filter() {
-  function create_level(level) {
-    const dom = create_filter_element({
-      parent: document.querySelector("#level_filter > ul"),
-      class: "selected",
-      textContent: level.name,
-    });
-    dom.dataset.id = level.id;
-  }
-  array_each(LEVELS, create_level);
-}
-// Create Subjects Filter
-function create_subjects_filter() {
-  function create_subject(subject) {
-    const dom = create_filter_element({
-      parent: document.querySelector("#subject_filter > ul"),
-      class: "selected",
-      textContent: subject.name,
-    });
-    dom.dataset.id = subject.id;
-  }
-  array_each(SUBJECTS, create_subject);
-}
-// Create Search Field
-function create_language_filter() {
-  function create_element(data) {
-    const dom = create_filter_element({
-      parent: document.querySelector("#language_filter > ul"),
-      class: "selected",
-      textContent: data.name,
-    });
-    dom.dataset.id = data.id;
-  }
-  array_each(LANGUAGES, create_element);
 }
 
 
@@ -231,6 +222,48 @@ function create_programme(programme) {
     NO RETURN VALUE
 
   */
+
+
+  let grid = document.querySelector('#programmes ul');
+
+  let parent_box = document.createElement('div');
+  parent_box.classList.add("programme");
+  grid.appendChild(parent_box);
+
+  first_child = document.createElement('li');
+  parent_box.appendChild(first_child);
+
+  let second_child = document.createElement('li');
+  parent_box.appendChild(second_child);
+
+
+  let information = {
+
+    uni: UNIVERSITIES[programme.universityID].name,
+    city: CITIES[UNIVERSITIES[programme.universityID].cityID].name,
+    country: COUNTRIES[CITIES[UNIVERSITIES[programme.universityID].cityID].countryID].name,
+
+    level: LEVELS[programme.levelID - 1].name,
+    subject: SUBJECTS[programme.subjectID].name,
+    language: LANGUAGES[programme.languageID].name,
+
+    sun: CITIES[UNIVERSITIES[programme.universityID].cityID].sun,
+
+    images: CITIES[UNIVERSITIES[programme.universityID].cityID].imagesNormal[0]
+
+  };
+
+  let sun_percent = percenter(information.sun, 365);
+
+
+  first_child.innerHTML = `<h1>${programme.name}</h1>
+        <p>${information.uni}</p>
+        <p>${information.city}, ${information.country}</p>
+        <p>${information.level}, ${information.subject}, ${information.language}`
+  second_child.innerHTML = `<p>${information.city}, sun-index:${information.sun} (${sun_percent}%)</p>`
+  second_child.classList.add('bottom_programme');
+
+  parent_box.style.backgroundImage = `url(../media/geo_images/${information.images})`
 
 }
 
