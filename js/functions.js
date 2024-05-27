@@ -247,11 +247,44 @@ function update_programmes() {
         the current filter status (which filter elements are selected / unselected).
         It uses the function read_filters to know which programmes need to be included.
 
-        VG: The top images (header) need to be updated here
-
       NO RETURN VALUE
 
   */
+
+  let grid = document.querySelector('#programmes ul');
+  let parent_box = document.createElement('div');
+  parent_box.classList.add("programme");
+  grid.appendChild(parent_box);
+
+  let first_child = document.createElement('li');
+  parent_box.appendChild(first_child);
+
+  let second_child = doucment.createElement('li');
+  parent_box.appendChild(second_child);
+
+  let information = {
+    uni: UNIVERSITIES[programme.universityID].name,
+    city: CITIES[UNIVERSITIES[programme.universityID].cityID].name,
+    country: COUNTRIES[CITIES[UNIVERSITIES[programme.universityID].cityID].countryID].name,
+
+    subject: SUBJECTS[programme.subjectID - 1].name,
+    level: LEVELS[programme.levelID - 1].name,
+    language: LANGUAGES[programme.languageID - 1].name,
+
+    sun: CITIES[UNIVERSITIES[programme.universityID].cityID].sun,
+    images: CITIES[UNIVERSITIES[programme.universityID].cityID].imagesNormal[0]
+
+  }
+
+  first_child.innerHTML = `<h1>${programme.name}</h1>
+  <p>${information.uni}</p>
+  <p>${information.city}, ${information.country}</p>
+  <p<${information.level}, ${information.subject}, ${information.language} 
+  `
+  second_child.innerHTML = `<p>${information.city}, ${information.sun}</p>`
+  second_child.classList.add('bottom_programme');
+
+  parent_box.style.backgroundImage = `url(../media/geo_images/${information.images})`
 
 }
 
