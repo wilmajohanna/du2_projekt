@@ -11,8 +11,7 @@ function click_filter_element(event) {
 
     SIDE-EFFECTS
       Marks the clicked filter element as selected / unselected.
-      Since a filter element will have changed after the click, the list of
-      programmes must be updated.
+      Since a filter element will have changed after the  click the list of programmes must be updated.
 
       Attention VG
         Careful with the propagation of the click-event
@@ -230,7 +229,7 @@ function create_programme(programme) {
   parent_box.classList.add("programme");
   grid.appendChild(parent_box);
 
-  first_child = document.createElement('li');
+  let first_child = document.createElement('li');
   parent_box.appendChild(first_child);
 
   let second_child = document.createElement('li');
@@ -299,8 +298,7 @@ function update_programmes() {
 
 // G
 // WRITE SPECIFICATION
-// You must understand how this function works. There will be questions about it
-// in the code review (kodredovisning)
+// You must understand how this function works. There will be questions about it in the code review (kodredovisning)
 
 function read_filters() {
 
